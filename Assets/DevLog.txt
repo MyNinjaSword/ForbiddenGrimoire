@@ -1,0 +1,6 @@
+v0.2
+	- Developed prototype freeform alchemy and testing
+	- Added a tutorial
+
+v0.1
+	-Initial Release
