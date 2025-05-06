@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 4726551827874622889}
   m_Layer: 5
   m_Name: Vinegar
-  m_TagString: Untagged
+  m_TagString: vinegar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

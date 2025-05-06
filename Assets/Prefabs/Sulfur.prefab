@@ -536,7 +536,7 @@ GameObject:
   - component: {fileID: 7696866304555691799}
   m_Layer: 5
   m_Name: Sulfur
-  m_TagString: Untagged
+  m_TagString: sulfur
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
