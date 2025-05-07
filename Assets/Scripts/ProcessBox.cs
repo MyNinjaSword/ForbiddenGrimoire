@@ -14,7 +14,13 @@ public class ProcessBox : MonoBehaviour
         //GameObject gameObject = Instantiate(process);
         //gameObject.SetActive(true);
         //gameObject.transform.SetParent(processDisplay.transform, false);
+        plusSign.SetActive(false);
+        xSign.SetActive(true);
+    }
+
+    public void NextUp()
+    {
         plusSign.SetActive(true);
-        //xSign.SetActive(true);
+        xSign.SetActive(false);
     }
 }

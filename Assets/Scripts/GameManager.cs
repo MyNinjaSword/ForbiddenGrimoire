@@ -118,19 +118,16 @@ public class GameManager : MonoBehaviour
             return;
         }
         processStepsAdded++;
-        //ChangeMenu(2);
+        ChangeMenu(2);
         GameObject bufferObject = Instantiate(processStepBoxObject, processParent.transform, false);
         RectTransform rectTransform = bufferObject.GetComponent<RectTransform>();
         rectTransform.anchoredPosition = new Vector2(50 + (250 * processStepsAdded), 150);
         ProcessBox procBox = bufferObject.GetComponent<ProcessBox>();
-        procBox.isProcessSelected = true;
-        procBox.ProcessDisplay(bufferObject);
-        procBox.plusSign.SetActive(true);
-        procBox.xSign.SetActive(false);  
+        procBox.NextUp();
         proccessBoxScripts.Add(procBox);
         processBoxesObjects.Add(procBox.gameObject);
-        proccessBoxScripts[processStepsAdded-1].plusSign.SetActive(false);
-        proccessBoxScripts[processStepsAdded-1].xSign.SetActive(true);
+        proccessBoxScripts[processStepsAdded - 1].ProcessDisplay(bufferObject);
+        proccessBoxScripts[processStepsAdded - 1].isProcessSelected = true;
 
         if (processStepsAdded -2 >+ 0)
         {
@@ -144,7 +141,10 @@ public class GameManager : MonoBehaviour
 
     public void RemoveProcess()
     {
-
+        Destroy(proccessBoxScripts[processStepsAdded].gameObject);
+        Destroy(proccessBoxScripts[processStepsAdded - 1].gameObject);
+        processStepsAdded--;
+        proccessBoxScripts[processStepsAdded-1].xSign.SetActive(true);
     }
 
 
