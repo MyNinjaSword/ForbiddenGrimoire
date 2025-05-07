@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class IngredientBox : MonoBehaviour
 {
-    public bool ingredientSelected;
+    public bool isIngredientSelected;
     public GameObject ingredientDisplay;
     public GameObject plusSign;
     public GameObject xSign;

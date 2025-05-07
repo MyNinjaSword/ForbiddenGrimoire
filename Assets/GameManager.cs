@@ -20,6 +20,14 @@ public class GameManager : MonoBehaviour
     public List<string> activeIngredients = new List<string>();
     public GameObject[] crossBoxes = new GameObject[2];//used for blocking player from selecting in further boxes
 
+    //Process Boxes
+    public GameObject processStepBoxObject;//do we need?
+    public List<GameObject> processBoxesObjects = new List<GameObject>();
+    public List<ProcessBox> proccessBoxScripts;
+    private int processStepsAdded = 0;
+    public List<string> stepsAdded = new List<string>();
+    public GameObject processParent;
+
     private void Awake()
     {
         {
@@ -58,13 +66,13 @@ public class GameManager : MonoBehaviour
         }
         activeIngredients.Add(ingredientTags[idIngredient]);
 
-        selectionBoxes[boxesOccupied].ingredientSelected = true;
+        selectionBoxes[boxesOccupied].isIngredientSelected = true;
         GameObject bufferObject = Instantiate(possibleIngredients[idIngredient], selectionBoxesObjects[boxesOccupied].transform, false);
         bufferObject.SetActive(true);
         var rectTransform = bufferObject.GetComponent<RectTransform>();
         rectTransform.pivot = new Vector2(0.5f, 0);
         rectTransform.anchoredPosition = Vector2.zero;
-        selectionBoxes[boxesOccupied].ingredientSelected = true;
+        selectionBoxes[boxesOccupied].isIngredientSelected = true;
         selectionBoxes[boxesOccupied].plusSign.SetActive(false);
         selectionBoxes[boxesOccupied].xSign.SetActive(true);  
         selectionBoxes[boxesOccupied].ingredientDisplay = bufferObject;
@@ -86,7 +94,7 @@ public class GameManager : MonoBehaviour
     public void ClearSelection(int idIngredient)
     {
         boxesOccupied--;
-        selectionBoxes[boxesOccupied].ingredientSelected = false;
+        selectionBoxes[boxesOccupied].isIngredientSelected = false;
         selectionBoxes[boxesOccupied].plusSign.SetActive(true);
         selectionBoxes[boxesOccupied].xSign.SetActive(false);
         activeIngredients.Remove(activeIngredients[(int)idIngredient]);
@@ -101,6 +109,42 @@ public class GameManager : MonoBehaviour
         {
             
         }
+    }
+
+    public void AddProcess()
+    {
+        if(processStepsAdded == 5) //put big x here
+        {
+            return;
+        }
+        processStepsAdded++;
+        //ChangeMenu(2);
+        GameObject bufferObject = Instantiate(processStepBoxObject, processParent.transform, false);
+        RectTransform rectTransform = bufferObject.GetComponent<RectTransform>();
+        rectTransform.anchoredPosition = new Vector2(50 + (250 * processStepsAdded), 150);
+        ProcessBox procBox = bufferObject.GetComponent<ProcessBox>();
+        procBox.isProcessSelected = true;
+        procBox.ProcessDisplay(bufferObject);
+        procBox.plusSign.SetActive(true);
+        procBox.xSign.SetActive(false);  
+        proccessBoxScripts.Add(procBox);
+        processBoxesObjects.Add(procBox.gameObject);
+        proccessBoxScripts[processStepsAdded-1].plusSign.SetActive(false);
+        proccessBoxScripts[processStepsAdded-1].xSign.SetActive(true);
+
+        if (processStepsAdded -2 >+ 0)
+        {
+            proccessBoxScripts[processStepsAdded - 2].xSign.SetActive(false); 
+        }
+        if(processStepsAdded == 2)
+        {
+            proccessBoxScripts[0].xSign.SetActive(false);
+        }
+    }
+
+    public void RemoveProcess()
+    {
+
     }
 
 
